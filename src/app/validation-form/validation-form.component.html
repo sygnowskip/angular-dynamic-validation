@@ -1,0 +1,4 @@
+<form novalidate [formGroup]="validationFormGroup" (ngSubmit)="onSubmit()">
+  {{validationFormGroup.value | json}}
+  <ng-content></ng-content>
+</form>
