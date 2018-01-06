@@ -1,0 +1,31 @@
+{
+  "exampleModel": {
+    "fields": {
+      "name": {
+        "rules": {
+          "required": {
+            "required": true,
+            "message": "This field is required."
+          },
+          "length": {
+            "min": 0,
+            "max": 50,
+            "message": "Max length is 50"
+          }
+        }
+      },
+      "surname": {
+        "rules": {
+          "required": {
+            "required": true,
+            "message": "This field is required."
+          },
+          "regex": {
+            "regex": "^[^0][0-9]+$",
+            "ignoreCase": false
+          }
+        }
+      }
+    }
+  }
+}
