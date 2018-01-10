@@ -1,6 +1,7 @@
 import { ValidationRulesService } from '../../components/validation/validation-rules.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { IValidationFields } from '../../components/validation/types';
 
 export class HomeModel {
   public name: string;
@@ -14,6 +15,7 @@ export class HomeModel {
 export class HomeComponent implements OnInit {
   public form: FormGroup;
   public model: HomeModel;
+  public rules: IValidationFields;
 
   constructor(
     private validationRulesService: ValidationRulesService
@@ -21,7 +23,9 @@ export class HomeComponent implements OnInit {
     this.model = new HomeModel();
     this.form = new FormGroup({});
     this.validationRulesService.getValidation("exampleModel").subscribe(rules => {
-      console.log(rules);
+      if (rules) {
+        this.rules = rules;
+      }
     });
   }
 
@@ -29,7 +33,6 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit() {
-    debugger;
     return false;
   }
 
