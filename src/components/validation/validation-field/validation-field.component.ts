@@ -1,9 +1,10 @@
 import { FormGroupValidationRulesDirective } from '../form-group-validation-rules/form-group-validation-rules.directive';
 import { Component, OnInit, Self, Host, Inject, Input, SkipSelf } from '@angular/core';
-import { FormGroup, Validators, ControlContainer, Form, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, ControlContainer, Form, FormBuilder, ValidatorFn } from '@angular/forms';
 import { FormControl, FormGroupDirective } from '@angular/forms';
 import { ValidationRulesService } from '../validation-rules.service';
 import { IValidationFields } from '../types';
+import { AbstractControl } from '@angular/forms/src/model';
 
 @Component({
   selector: 'validation-field',
@@ -12,6 +13,8 @@ import { IValidationFields } from '../types';
 })
 export class ValidationFieldComponent implements OnInit {
   private rules: IValidationFields | undefined;
+  private manualAppliedValidators: Array<ValidatorFn>;
+  private manualAppliedAsyncValidators: Array<ValidatorFn>;
 
   @Input()
   public field: string;
@@ -43,7 +46,7 @@ export class ValidationFieldComponent implements OnInit {
 
   // VALIDATORS REGION
   private updateValidators() {
-    const control = this.formGroupDirective.form.get(this.field);
+    const control = this.getControl();
     if (!control) {
       return;
     }
@@ -60,9 +63,28 @@ export class ValidationFieldComponent implements OnInit {
   }
 
   // CONTROL REGION
+  private getControl(): AbstractControl | null {
+    return this.formGroupDirective.form.get(this.field);
+  }
+
   private setupControl() {
-    console.log(this.field);
+    const controlExists = !!this.getControl();
+    if (controlExists) {
+      this.saveExistingControlValidators();
+      return;
+    }
+
     const emptyControl = this.formBuilder.control('');
     this.formGroupDirective.form.addControl(this.field, emptyControl);
+  }
+
+  private saveExistingControlValidators() {
+    const control = this.getControl();
+    if (!control) {
+      return;
+    }
+
+    debugger;
+    // this.manualAppliedAsyncValidators = control.asyncValidator;
   }
 }
