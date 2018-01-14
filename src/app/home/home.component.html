@@ -1,11 +1,9 @@
 <form [formGroup]="form" [formGroupValidationRules]="rules">
-    <validation-field field="name">
-      <label for="name">Name</label>
+    <validation-field field="name" label="Name">
       <input type="text" class="form-control" formControlName="name" placeholder="Enter name" />
       <small id="nameHelp" class="form-text text-muted">We'll never share your name with anyone else.</small>
     </validation-field>
-    <validation-field field="surname">
-      <label for="surname">Surname</label>
+    <validation-field field="surname" label="Surname">
       <input type="text" class="form-control" formControlName="surname" placeholder="Enter surname" />
       <small id="surnameHelp" class="form-text text-muted">We'll never share your surname with anyone else.</small>
     </validation-field>

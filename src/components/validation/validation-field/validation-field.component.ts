@@ -1,10 +1,12 @@
 import { FormGroupValidationRulesDirective } from '../form-group-validation-rules/form-group-validation-rules.directive';
-import { Component, OnInit, Self, Host, Inject, Input, SkipSelf } from '@angular/core';
+import { Component, OnInit, Self, Host, Inject, Input, SkipSelf, Injector } from '@angular/core';
 import { FormGroup, Validators, ControlContainer, Form, FormBuilder, ValidatorFn } from '@angular/forms';
 import { FormControl, FormGroupDirective } from '@angular/forms';
 import { ValidationRulesService } from '../validation-rules.service';
 import { IValidationFields } from '../types';
 import { AbstractControl } from '@angular/forms/src/model';
+import { ValidationFormControl } from '../validation-form-control/validation-form-control.model';
+import { ValidatorsFactoryService } from '../validators-factory/validators-factory.service';
 
 @Component({
   selector: 'validation-field',
@@ -15,19 +17,25 @@ export class ValidationFieldComponent implements OnInit {
   private rules: IValidationFields | undefined;
   private manualAppliedValidators: Array<ValidatorFn>;
   private manualAppliedAsyncValidators: Array<ValidatorFn>;
+  private control: ValidationFormControl;
 
   @Input()
   public field: string;
 
+  @Input()
+  public label: string;
+
   constructor(
     @Host() @SkipSelf() private formGroupDirective: FormGroupDirective,
     @Host() @SkipSelf() private rulesDirective: FormGroupValidationRulesDirective,
+    private validatorsFactory: ValidatorsFactoryService,
     private formBuilder: FormBuilder
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.subscribeRulesChanges();
-    this.setupControl();
+    this.control = this.setupControl();
     this.updateValidators();
   }
 
@@ -56,9 +64,8 @@ export class ValidationFieldComponent implements OnInit {
       control.clearAsyncValidators();
     } else {
       const rulesForField = this.rules[this.field];
-      if (rulesForField.rules.required) {
-        control.setValidators([Validators.required]);
-      }
+      const validators = this.validatorsFactory.getValidators(rulesForField);
+      control.setValidators(validators);
     }
   }
 
@@ -67,24 +74,24 @@ export class ValidationFieldComponent implements OnInit {
     return this.formGroupDirective.form.get(this.field);
   }
 
-  private setupControl() {
-    const controlExists = !!this.getControl();
-    if (controlExists) {
-      this.saveExistingControlValidators();
-      return;
+  private setupControl(): ValidationFormControl {
+    const control = <ValidationFormControl>this.getControl();
+    if (!!control) {
+      this.displayWarningForControlWithoutCustomValidators(control);
+      return control;
     }
 
-    const emptyControl = this.formBuilder.control('');
-    this.formGroupDirective.form.addControl(this.field, emptyControl);
+    this.formGroupDirective.form.addControl(this.field, this.formBuilder.control(''));
+    return <ValidationFormControl>this.getControl();
   }
 
-  private saveExistingControlValidators() {
-    const control = this.getControl();
+  private displayWarningForControlWithoutCustomValidators(control: ValidationFormControl) {
     if (!control) {
       return;
     }
 
-    debugger;
-    // this.manualAppliedAsyncValidators = control.asyncValidator;
+    if (!control.manualAppliedAsyncValidators && !control.manualAppliedValidators) {
+      console.warn("You probably used FormControl with custom validation rules, but you should ValidationFormControl, otherwise your custom applied rules will be overwritten");
+    }
   }
 }
