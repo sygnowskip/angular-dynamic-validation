@@ -17,11 +17,9 @@ export class FormGroupValidationRulesDirective implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.rules);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
     if (changes.hasOwnProperty("rules") && !!changes["rules"].currentValue) {
       this.validationRulesChangedEvent.next(this.rules);
     }

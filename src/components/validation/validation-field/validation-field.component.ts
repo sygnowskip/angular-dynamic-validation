@@ -1,9 +1,9 @@
 import { FormGroupValidationRulesDirective } from '../form-group-validation-rules/form-group-validation-rules.directive';
 import { Component, OnInit, Self, Host, Inject, Input, SkipSelf, Injector } from '@angular/core';
-import { FormGroup, Validators, ControlContainer, Form, FormBuilder, ValidatorFn } from '@angular/forms';
+import { FormGroup, Validators, ControlContainer, Form, FormBuilder, ValidatorFn, AsyncValidatorFn } from '@angular/forms';
 import { FormControl, FormGroupDirective } from '@angular/forms';
 import { ValidationRulesService } from '../validation-rules.service';
-import { IValidationFields } from '../types';
+import { IValidationFields, IValidationFieldRules } from '../types';
 import { AbstractControl } from '@angular/forms/src/model';
 import { ValidationFormControl } from '../validation-form-control/validation-form-control.model';
 import { ValidatorsFactoryService } from '../validators-factory/validators-factory.service';
@@ -15,8 +15,6 @@ import { ValidatorsFactoryService } from '../validators-factory/validators-facto
 })
 export class ValidationFieldComponent implements OnInit {
   private rules: IValidationFields | undefined;
-  private manualAppliedValidators: Array<ValidatorFn>;
-  private manualAppliedAsyncValidators: Array<ValidatorFn>;
   private control: ValidationFormControl;
 
   @Input()
@@ -60,22 +58,38 @@ export class ValidationFieldComponent implements OnInit {
     }
 
     if (!this.rules) {
-      control.clearValidators();
-      control.clearAsyncValidators();
+      console.warn("Rules for field '" + this.field + "' are missing!");
     } else {
       const rulesForField = this.rules[this.field];
-      const validators = this.validatorsFactory.getValidators(rulesForField);
-      control.setValidators(validators);
+      this.applyAsyncValidators(control, rulesForField);
+      this.applyValidators(control, rulesForField);
     }
   }
 
+  private applyAsyncValidators(control: ValidationFormControl, rulesForField: { rules: IValidationFieldRules }) {
+    control.clearAsyncValidators();
+
+    // TODO
+    const asyncValidators = new Array<AsyncValidatorFn>();
+    const mergedAsyncValidators = asyncValidators.concat(control.manualAppliedAsyncValidators || []);
+    control.setAsyncValidators(mergedAsyncValidators);
+  }
+
+  private applyValidators(control: ValidationFormControl, rulesForField: { rules: IValidationFieldRules }) {
+    control.clearValidators();
+
+    const validators = this.validatorsFactory.getValidators(rulesForField);
+    const mergedValidators = validators.concat(control.manualAppliedValidators || []);
+    control.setValidators(mergedValidators);
+  }
+
   // CONTROL REGION
-  private getControl(): AbstractControl | null {
-    return this.formGroupDirective.form.get(this.field);
+  private getControl(): ValidationFormControl | null {
+    return this.formGroupDirective.form.get(this.field) as ValidationFormControl;
   }
 
   private setupControl(): ValidationFormControl {
-    const control = <ValidationFormControl>this.getControl();
+    const control = this.getControl();
     if (!!control) {
       this.displayWarningForControlWithoutCustomValidators(control);
       return control;

@@ -3,7 +3,7 @@ import { AbstractControlOptions } from "@angular/forms/src/model";
 
 export class ValidationFormControl extends FormControl {
   public manualAppliedValidators: ValidatorFn | ValidatorFn[] | null = null;
-  public manualAppliedAsyncValidators: ValidatorFn | ValidatorFn[] | null = null;
+  public manualAppliedAsyncValidators: AsyncValidatorFn | AsyncValidatorFn[] | null = null;
 
   constructor(formState?: any, validatorOrOpts?: ValidatorFn | ValidatorFn[] | AbstractControlOptions | null, asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null) {
     super(formState, validatorOrOpts, asyncValidator);

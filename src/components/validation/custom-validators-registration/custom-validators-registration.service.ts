@@ -3,6 +3,5 @@ import { AvailableValidators } from "../validators-factory/validators-factory.se
 import { RequiredValidatorService } from "../validators-factory/validators/required/required-validator.service";
 
 export function registerCustomValidators() {
-  console.log("on init");
   AvailableValidators.register('required', RequiredValidatorService);
 }

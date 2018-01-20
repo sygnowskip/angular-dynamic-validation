@@ -46,11 +46,8 @@ export class ValidatorsFactoryService {
     const fieldRules = field.rules;
     const validators = new Array<ValidatorFn>();
 
-    console.log(fieldRules);
-
     for (const ruleName in fieldRules) {
       if (fieldRules.hasOwnProperty(ruleName)) {
-        console.log(ruleName);
         const validator = this.getValidator(ruleName, fieldRules[ruleName]);
         if (!validator) {
           continue;

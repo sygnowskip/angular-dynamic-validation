@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
   ) {
     this.model = new HomeModel();
     this.form = new FormGroup({
-      name: new FormControl('', [Validators.required]),
       surname: new ValidationFormControl('', [Validators.required])
     });
     this.validationRulesService.getValidation("exampleModel").subscribe(rules => {
