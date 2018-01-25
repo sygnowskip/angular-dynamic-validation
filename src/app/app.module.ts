@@ -54,3 +54,12 @@ const routes: Routes = [
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+// 1. Czytanie błędów z odpowiedzi z serwera i przypisywanie do pól
+// 2. Komponent na wiadomości pod polem
+// 3. Komponent na wiadomości nie przypisane do pól
+// 4. Oznaczanie pól wymaganych
+
+// 5. Paczka
+// 6. Przykładowa aplikacja z wykorzystaniem paczki
