@@ -22,6 +22,7 @@ import {
 } from '../components/validation/form-group-validation-rules/form-group-validation-rules.directive';
 
 import * as validationRules from './../validation/rules.json';
+import { ValidationFieldRefresherService } from '../components/validation/validation-field-refresher/validation-field-refresher.service';
 
 const routes: Routes = [
   {
@@ -47,6 +48,7 @@ const routes: Routes = [
     ValidationRulesService,
     ValidatorsFactoryService,
     RequiredValidatorService,
+    ValidationFieldRefresherService,
     { provide: APP_INITIALIZER, useValue: registerCustomValidators, multi: true }
   ],
   bootstrap: [AppComponent]

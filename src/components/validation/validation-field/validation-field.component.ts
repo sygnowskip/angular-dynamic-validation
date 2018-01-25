@@ -1,12 +1,12 @@
 import { FormGroupValidationRulesDirective } from '../form-group-validation-rules/form-group-validation-rules.directive';
-import { Component, OnInit, Self, Host, Inject, Input, SkipSelf, Injector } from '@angular/core';
+import { Component, OnInit, Host, Input, SkipSelf } from '@angular/core';
 import { FormGroup, Validators, ControlContainer, Form, FormBuilder, ValidatorFn, AsyncValidatorFn } from '@angular/forms';
 import { FormControl, FormGroupDirective } from '@angular/forms';
 import { ValidationRulesService } from '../validation-rules.service';
 import { IValidationFields, IValidationFieldRules } from '../types';
-import { AbstractControl } from '@angular/forms/src/model';
 import { ValidationFormControl } from '../validation-form-control/validation-form-control.model';
 import { ValidatorsFactoryService } from '../validators-factory/validators-factory.service';
+import { ValidationFieldRefresherService } from '../validation-field-refresher/validation-field-refresher.service';
 
 @Component({
   selector: 'validation-field',
@@ -27,7 +27,8 @@ export class ValidationFieldComponent implements OnInit {
     @Host() @SkipSelf() private formGroupDirective: FormGroupDirective,
     @Host() @SkipSelf() private rulesDirective: FormGroupValidationRulesDirective,
     private validatorsFactory: ValidatorsFactoryService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private validationRefresher: ValidationFieldRefresherService
   ) {
   }
 
@@ -35,9 +36,25 @@ export class ValidationFieldComponent implements OnInit {
     this.subscribeRulesChanges();
     this.control = this.setupControl();
     this.updateValidators();
+    this.bindRefresher();
   }
 
   // RULES REGION
+  private bindRefresher() {
+    this.validationRefresher.refreshValidationTriggered
+      .subscribe((field: string) => {
+        if (field !== this.field) {
+          return;
+        }
+
+        if (!this.control) {
+          return;
+        }
+
+        this.control.updateValueAndValidity();
+      });
+  }
+
   private subscribeRulesChanges() {
     this.rules = this.rulesDirective.rules;
     this.rulesDirective.validationRulesChanged.subscribe((rules: IValidationFields | undefined) => this.rulesChanged(rules));
