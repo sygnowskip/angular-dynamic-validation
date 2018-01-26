@@ -1,5 +1,6 @@
 <form [formGroup]="form" [formGroupValidationRules]="rules">
   {{ model | json }}
+
   <div class="form-check">
     <input type="checkbox" class="form-check-input" [(ngModel)]="model.isSurnameRequired"  formControlName="isSurnameRequired" (change)="checkboxChanged()">
     <label class="form-check-label" for="surnameRequired">Surname required</label>

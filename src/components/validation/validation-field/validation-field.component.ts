@@ -7,6 +7,8 @@ import { IValidationFields, IValidationFieldRules } from '../types';
 import { ValidationFormControl } from '../validation-form-control/validation-form-control.model';
 import { ValidatorsFactoryService } from '../validators-factory/validators-factory.service';
 import { ValidationFieldRefresherService } from '../validation-field-refresher/validation-field-refresher.service';
+import { ServerErrorService } from '../server-error/server-error.service';
+import { ServerValidationError } from '../server-error-reader/server-error-reader.service';
 
 @Component({
   selector: 'validation-field',
@@ -28,7 +30,8 @@ export class ValidationFieldComponent implements OnInit {
     @Host() @SkipSelf() private rulesDirective: FormGroupValidationRulesDirective,
     private validatorsFactory: ValidatorsFactoryService,
     private formBuilder: FormBuilder,
-    private validationRefresher: ValidationFieldRefresherService
+    private validationRefresher: ValidationFieldRefresherService,
+    private serverErrors: ServerErrorService
   ) {
   }
 
@@ -37,9 +40,20 @@ export class ValidationFieldComponent implements OnInit {
     this.control = this.setupControl();
     this.updateValidators();
     this.bindRefresher();
+    this.bindServerErrors();
   }
 
   // RULES REGION
+  private bindServerErrors() {
+    this.serverErrors.validationErrorOccured.subscribe((error: ServerValidationError) => {
+      if (error.property !== this.field) {
+        return;
+      }
+
+      this.control.setErrors({ server: true });
+    });
+  }
+
   private bindRefresher() {
     this.validationRefresher.refreshValidationTriggered
       .subscribe((field: string) => {

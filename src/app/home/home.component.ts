@@ -3,8 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IValidationFields } from '../../components/validation/types';
 import { ValidationFormControl } from '../../components/validation/validation-form-control/validation-form-control.model';
-import { CustomValidators } from '../../components/validation/conditional-validator/conditional-validator.service';
 import { ValidationFieldRefresherService } from '../../components/validation/validation-field-refresher/validation-field-refresher.service';
+import { HttpClient } from '@angular/common/http';
+import { CustomValidators } from '../../components/validation/validators-factory/validators/conditional-validator/conditional-validator.service';
+import { ServerErrorService } from '../../components/validation/server-error/server-error.service';
 
 export class HomeModel {
   public name: string;
@@ -24,8 +26,13 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private validationRulesService: ValidationRulesService,
-    private validationRefresher: ValidationFieldRefresherService
+    private validationRefresher: ValidationFieldRefresherService,
+    private http: HttpClient,
+    private serverErrors: ServerErrorService
   ) {
+  }
+
+  ngOnInit() {
     this.model = new HomeModel();
     this.form = new FormGroup({
       surname: new ValidationFormControl('', [CustomValidators.conditionalValidator(() => this.model.isSurnameRequired, Validators.required)]),
@@ -40,9 +47,22 @@ export class HomeComponent implements OnInit {
     this.form.valueChanges.subscribe((changes: any) => {
       // TODO Iterate over and find changed properties
     });
-  }
 
-  ngOnInit() {
+    this.http.post('http://localhost:4201/api/without-errors', undefined).subscribe(
+      data => {
+        console.log(data);
+      },
+      error => this.serverErrors.catchBadRequest(error)
+    );
+
+    this.http.post('http://localhost:4201/api/with-errors', undefined).subscribe(
+      data => {
+        console.log(data);
+      },
+      error => this.serverErrors.catchBadRequest(error)
+    );
+
+    console.log(this.form);
   }
 
   onSubmit() {

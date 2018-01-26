@@ -23,6 +23,8 @@ import {
 
 import * as validationRules from './../validation/rules.json';
 import { ValidationFieldRefresherService } from '../components/validation/validation-field-refresher/validation-field-refresher.service';
+import { ServerErrorReaderService } from '../components/validation/server-error-reader/server-error-reader.service';
+import { ServerErrorService } from '../components/validation/server-error/server-error.service';
 
 const routes: Routes = [
   {
@@ -49,7 +51,9 @@ const routes: Routes = [
     ValidatorsFactoryService,
     RequiredValidatorService,
     ValidationFieldRefresherService,
-    { provide: APP_INITIALIZER, useValue: registerCustomValidators, multi: true }
+    { provide: APP_INITIALIZER, useValue: registerCustomValidators, multi: true },
+    ServerErrorReaderService,
+    ServerErrorService
   ],
   bootstrap: [AppComponent]
 })
