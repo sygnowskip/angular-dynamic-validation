@@ -75,6 +75,7 @@ export class ValidationFieldComponent implements OnInit {
 
   private subscribeRulesChanges() {
     this.rules = this.rulesDirective.rules;
+    this.updateDefaultMessages();
     this.rulesDirective.validationRulesChanged.subscribe((rules: IValidationFields | undefined) => this.rulesChanged(rules));
   }
 

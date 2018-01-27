@@ -24,6 +24,9 @@ export class ValidationFieldMessagesComponent implements OnInit {
 
   constructor(private validationFieldMessages: ValidationFieldMessagesDefaults) { }
 
+  ngOnInit(): void {
+  }
+
   getValidationMessage(rule: string): string | undefined {
     return this.defaultValidationMessages[rule] || this.validationFieldMessages.get(rule);
   }

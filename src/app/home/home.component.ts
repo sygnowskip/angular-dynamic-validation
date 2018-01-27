@@ -50,19 +50,15 @@ export class HomeComponent implements OnInit {
 
     this.http.post('http://localhost:4201/api/without-errors', undefined).subscribe(
       data => {
-        console.log(data);
       },
       error => this.serverErrors.catchBadRequest(error)
     );
 
     this.http.post('http://localhost:4201/api/with-errors', undefined).subscribe(
       data => {
-        console.log(data);
       },
       error => this.serverErrors.catchBadRequest(error)
     );
-
-    console.log(this.form);
   }
 
   onSubmit() {
