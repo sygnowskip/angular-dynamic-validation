@@ -1,7 +1,4 @@
 import {
-  registerCustomValidators,
-} from '../components/validation/custom-validators-registration/custom-validators-registration.service';
-import {
   RequiredValidatorService,
 } from '../components/validation/validators-factory/validators/required/required-validator.service';
 import { ValidatorsFactoryService } from '../components/validation/validators-factory/validators-factory.service';
@@ -25,6 +22,11 @@ import * as validationRules from './../validation/rules.json';
 import { ValidationFieldRefresherService } from '../components/validation/validation-field-refresher/validation-field-refresher.service';
 import { ServerErrorReaderService } from '../components/validation/server-error-reader/server-error-reader.service';
 import { ServerErrorService } from '../components/validation/server-error/server-error.service';
+import { ValidationFieldMessagesComponent } from '../components/validation/validation-field-messages/validation-field-messages.component';
+import { registerCustomValidators } from '../components/validation/custom-validators-registration/custom-validators-registration.function';
+import { defaultErrorMessagesConfiguration } from '../components/validation/validation-field-messages-defaults-registration/validation-field-messages-defaults-registration.function';
+import { ValidationFieldMessagesDefaults } from '../components/validation/validation-field-messages-defaults/validation-field-messages-defaults.service';
+import { ObjectKeysPipe } from '../components/validation/object-keys-pipe/object-keys.pipe';
 
 const routes: Routes = [
   {
@@ -37,7 +39,9 @@ const routes: Routes = [
     AppComponent,
     HomeComponent,
     ValidationFieldComponent,
-    FormGroupValidationRulesDirective
+    FormGroupValidationRulesDirective,
+    ValidationFieldMessagesComponent,
+    ObjectKeysPipe
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,14 @@ const routes: Routes = [
     ValidatorsFactoryService,
     RequiredValidatorService,
     ValidationFieldRefresherService,
+    ValidationFieldMessagesDefaults,
     { provide: APP_INITIALIZER, useValue: registerCustomValidators, multi: true },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (validationFieldMessagesDefaults: ValidationFieldMessagesDefaults) => () => defaultErrorMessagesConfiguration(validationFieldMessagesDefaults),
+      deps: [ValidationFieldMessagesDefaults],
+      multi: true
+    },
     ServerErrorReaderService,
     ServerErrorService
   ],

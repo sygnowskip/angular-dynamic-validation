@@ -1,7 +1,5 @@
 <div class="form-group">
   <label>{{label}}</label>
   <ng-content></ng-content>
-  <div>
-    {{ control.errors | json }}
-  </div>
+  <validation-field-messages [validationErrors]="control.errors" [defaultValidationMessages]="defaultErrorMessages"></validation-field-messages>
 </div>

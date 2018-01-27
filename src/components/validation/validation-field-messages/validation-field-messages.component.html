@@ -1,0 +1,6 @@
+<div class="errors">
+  <div *ngFor="let error of validationErrors | keys">
+    {{ getValidationMessage(error) }}
+  </div>
+  {{ validationErrors | json }}
+</div>

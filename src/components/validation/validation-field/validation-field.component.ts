@@ -9,6 +9,7 @@ import { ValidatorsFactoryService } from '../validators-factory/validators-facto
 import { ValidationFieldRefresherService } from '../validation-field-refresher/validation-field-refresher.service';
 import { ServerErrorService } from '../server-error/server-error.service';
 import { ServerValidationError } from '../server-error-reader/server-error-reader.service';
+import { ValidationFieldErrorsMessages } from '../validation-field-messages/validation-field-messages.component';
 
 @Component({
   selector: 'validation-field',
@@ -18,6 +19,8 @@ import { ServerValidationError } from '../server-error-reader/server-error-reade
 export class ValidationFieldComponent implements OnInit {
   private rules: IValidationFields | undefined;
   private control: ValidationFormControl;
+
+  public defaultErrorMessages: ValidationFieldErrorsMessages = new ValidationFieldErrorsMessages();
 
   @Input()
   public field: string;
@@ -51,6 +54,7 @@ export class ValidationFieldComponent implements OnInit {
       }
 
       this.control.setErrors({ server: true });
+      this.defaultErrorMessages.server = error.message;
     });
   }
 
@@ -78,6 +82,29 @@ export class ValidationFieldComponent implements OnInit {
     if (rules) {
       this.rules = rules;
       this.updateValidators();
+      this.updateDefaultMessages();
+    }
+  }
+
+  private updateDefaultMessages() {
+    if (!this.rules) {
+      return;
+    }
+
+    const rulesForField = this.rules[this.field].rules;
+    if (!rulesForField) {
+      return;
+    }
+    for (const rule in rulesForField) {
+      if (!rulesForField.hasOwnProperty(rule)) {
+        continue;
+      }
+
+      const ruleDefinition = rulesForField[rule];
+      if (!ruleDefinition) {
+        continue;
+      }
+      this.defaultErrorMessages[rule] = ruleDefinition.message;
     }
   }
 
