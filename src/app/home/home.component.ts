@@ -47,7 +47,9 @@ export class HomeComponent implements OnInit {
     this.form.valueChanges.subscribe((changes: any) => {
       // TODO Iterate over and find changed properties
     });
+  }
 
+  private callApi(): void {
     this.http.post('http://localhost:4201/api/without-errors', undefined).subscribe(
       data => {
       },
@@ -62,7 +64,7 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit() {
-    return false;
+    this.callApi();
   }
 
   public checkboxChanged() {

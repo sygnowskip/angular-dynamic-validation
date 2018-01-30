@@ -31,6 +31,13 @@ app.post('/api/with-errors', function (req, res) {
       {
         "property": "surname",
         "message": "This is response from server for surname"
+      },
+      {
+        "property": "unknown",
+        "message": "This is response from server for unknown property"
+      },
+      {
+        "message": "This is response from server without property"
       }
     ]
   };

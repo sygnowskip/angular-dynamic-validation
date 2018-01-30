@@ -27,6 +27,8 @@ import { registerCustomValidators } from '../components/validation/custom-valida
 import { defaultErrorMessagesConfiguration } from '../components/validation/validation-field-messages-defaults-registration/validation-field-messages-defaults-registration.function';
 import { ValidationFieldMessagesDefaults } from '../components/validation/validation-field-messages-defaults/validation-field-messages-defaults.service';
 import { ObjectKeysPipe } from '../components/validation/object-keys-pipe/object-keys.pipe';
+import { FormMessagesComponent } from '../components/validation/form-messages/form-messages.component';
+import { FormMessagesCleanerService } from '../components/validation/form-messages-cleaner/form-messages-cleaner.service';
 
 const routes: Routes = [
   {
@@ -41,7 +43,8 @@ const routes: Routes = [
     ValidationFieldComponent,
     FormGroupValidationRulesDirective,
     ValidationFieldMessagesComponent,
-    ObjectKeysPipe
+    ObjectKeysPipe,
+    FormMessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -64,13 +67,14 @@ const routes: Routes = [
       multi: true
     },
     ServerErrorReaderService,
-    ServerErrorService
+    ServerErrorService,
+    FormMessagesCleanerService
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
 
-
+// TODO
 // 1. Czytanie błędów z odpowiedzi z serwera i przypisywanie do pól
 // 2. Komponent na wiadomości pod polem
 // 3. Komponent na wiadomości nie przypisane do pól
