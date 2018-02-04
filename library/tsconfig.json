@@ -6,12 +6,11 @@
     "moduleResolution": "node",
     "noEmit": true,
     "sourceMap": true,
-    "declaration": false,
+    "declaration": true,
     "strictNullChecks": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
+    "skipLibCheck": true,
     "lib": [
       "es2015",
       "dom"
@@ -19,6 +18,12 @@
     "typeRoots" : [
       "./node_modules/@types"
     ],
+    "types": [
+      "jasmine",
+      "node",
+      "webpack",
+      "webpack-env"
+    ]
   },
   "include": [
     "src/**/*.ts"
