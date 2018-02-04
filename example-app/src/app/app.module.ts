@@ -17,6 +17,7 @@ import { ValidationFieldComponent } from '../components/validation/validation-fi
 import {
   FormGroupValidationRulesDirective,
 } from '../components/validation/form-group-validation-rules/form-group-validation-rules.directive';
+import { TickTockModule } from 'angular-library-seed';
 
 import * as validationRules from './../validation/rules.json';
 import { ValidationFieldRefresherService } from '../components/validation/validation-field-refresher/validation-field-refresher.service';
@@ -50,7 +51,8 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    TickTockModule
   ],
   providers: [
     { provide: ValidationRulesService.VALIDATION_RULES, useValue: ValidationRulesProvider.getRules() },
