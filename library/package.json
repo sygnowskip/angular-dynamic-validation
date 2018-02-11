@@ -72,6 +72,7 @@
     "zone.js": "^0.8.20"
   },
   "jest": {
+    "verbose": true,
     "preset": "jest-preset-angular",
     "setupTestFrameworkScriptFile": "<rootDir>/setup-jest.ts"
   }

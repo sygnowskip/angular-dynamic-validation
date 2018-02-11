@@ -20,6 +20,15 @@ export class ServerErrorReaderService {
 
   constructor() { }
 
+  public getFirstError(response: ServerBadRequestError): ServerValidationError | undefined {
+    const errors = this.getErrors(response);
+    if (!errors || errors.length === 0) {
+      return undefined;
+    }
+
+    return errors[0];
+  }
+
   public getErrors(response: ServerBadRequestError): Array<ServerValidationError> | undefined {
     if (response.status !== this.badRequestStatus) {
       return undefined;
