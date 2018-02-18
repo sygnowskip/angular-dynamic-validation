@@ -6,38 +6,6 @@ import { AbstractControl } from '@angular/forms/src/model';
 import { ValidationErrors } from '@angular/forms/src/directives/validators';
 import { RequiredValidatorService } from './validators/required/required-validator.service';
 
-export class Validator {
-  constructor(name: string, service: { new(): IValidatorService<IBaseValidationRule> }) {
-    this.name = name;
-    this.service = service;
-  }
-
-  public name: string;
-  public service: { new(): IValidatorService<IBaseValidationRule> };
-}
-
-export interface IValidatorsDefinition {
-  [name: string]: Validator | undefined;
-}
-
-export class AvailableValidators {
-  private static validators: IValidatorsDefinition = {
-    // 'required': new Validator('required', RequiredValidatorService)
-  };
-
-  public static register(name: string, service: { new(): IValidatorService<IBaseValidationRule> }) {
-    if (!!this.validators[name]) {
-      console.warn("Validator " + name + " already exists and will be overwritten!");
-    }
-
-    this.validators[name] = new Validator(name, service);
-  }
-
-  public static get(name: string): Validator | undefined {
-    return this.validators[name];
-  }
-}
-
 @Injectable()
 export class ValidatorsFactoryService {
   constructor(private injector: Injector) { }
