@@ -1,14 +1,12 @@
-import { IValidatorService } from './validators/validator.interface';
-import { IValidationFieldRules, IBaseValidationRule } from '../types';
-import { Injectable, Injector } from '@angular/core';
-import { Validators, ValidatorFn } from '@angular/forms';
-import { AbstractControl } from '@angular/forms/src/model';
-import { ValidationErrors } from '@angular/forms/src/directives/validators';
-import { RequiredValidatorService } from './validators/required/required-validator.service';
+import { Injectable, Injector } from "@angular/core";
+import { ValidatorFn } from "@angular/forms";
+import { IValidationFieldRules, IBaseValidationRule } from "../../models/base-validation-rule.model";
+import { AvailableValidatorsService } from "./../available-validators";
 
 @Injectable()
 export class ValidatorsFactoryService {
-  constructor(private injector: Injector) { }
+  constructor(private injector: Injector,
+  private availableValidators: AvailableValidatorsService) { }
 
   getValidators(field: { rules: IValidationFieldRules }): Array<ValidatorFn> {
     const fieldRules = field.rules;
@@ -33,13 +31,15 @@ export class ValidatorsFactoryService {
       return undefined;
     }
 
-    const definition = AvailableValidators.get(name);
+    const definition = this.availableValidators.get(name);
     if (!definition) {
+      console.warn("Definition for validator '" + name + "' doest not exists!");
       return undefined;
     }
 
     const validator = this.injector.get(definition.service);
     if (!validator) {
+      console.warn("Service for validator '" + definition.service.toString() + "' is not registered!");
       return undefined;
     }
 
