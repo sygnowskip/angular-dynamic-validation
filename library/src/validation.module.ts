@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { ValidationModuleTestComponent } from './components';
 import { ObjectKeysPipe } from './pipes';
-import { ServerErrorReaderService, AvailableValidatorsService, ValidatorsFactoryService } from './services';
+import { ServerErrorReaderService, AvailableValidatorsService, ValidatorsFactoryService, ObjectMergeService } from './services';
 
 @NgModule({
   providers: [
     ServerErrorReaderService,
     AvailableValidatorsService,
-    ValidatorsFactoryService
+    ValidatorsFactoryService,
+    ObjectMergeService
   ],
   declarations: [
     ValidationModuleTestComponent,

@@ -1,8 +1,20 @@
-import { Validator } from "./models/validator.model";
 import { IBaseValidationRule } from "../../models/base-validation-rule.model";
 import { IValidatorService } from "../../validators/validator.interface";
-import { IValidatorsDefinition } from "./models/validator-definition.model";
 import { Injectable } from "@angular/core";
+
+export interface IValidatorsDefinition {
+  [name: string]: Validator | undefined;
+}
+
+export class Validator {
+  constructor(name: string, service: { new(): IValidatorService<IBaseValidationRule> }) {
+    this.name = name;
+    this.service = service;
+  }
+
+  public name: string;
+  public service: { new(): IValidatorService<IBaseValidationRule> };
+}
 
 @Injectable()
 export class AvailableValidatorsService {

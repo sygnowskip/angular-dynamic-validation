@@ -1,7 +1,7 @@
 import { Injectable, Injector } from "@angular/core";
 import { ValidatorFn } from "@angular/forms";
 import { IValidationFieldRules, IBaseValidationRule } from "../../models/base-validation-rule.model";
-import { AvailableValidatorsService } from "./../available-validators";
+import { AvailableValidatorsService } from "./../available-validators/available-validators.service";
 
 @Injectable()
 export class ValidatorsFactoryService {
