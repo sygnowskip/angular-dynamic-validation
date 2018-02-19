@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import { ValidatorsFactoryService } from './validators-factory.service';
 import { AvailableValidatorsService } from '../available-validators/available-validators.service';
 import { IValidatorService } from '../../validators/validator.interface';
-import { IBaseValidationRule } from '../../models/base-validation-rule.model';
+import { IBaseValidationRule } from '../../models';
 import { ValidatorFn } from '@angular/forms';
 
 class TestCaseValidator implements IValidatorService<IBaseValidationRule> {
