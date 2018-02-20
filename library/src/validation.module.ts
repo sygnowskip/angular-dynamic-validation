@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { ValidationModuleTestComponent } from './components';
 import { ObjectKeysPipe } from './pipes';
-import { ServerErrorReaderService, AvailableValidatorsService, ValidatorsFactoryService, ObjectMergeService, FormMessagesCleanerService } from './services';
+import {
+  ServerErrorReaderService, AvailableValidatorsService, ValidatorsFactoryService,
+  ObjectMergeService, FormMessagesCleanerService, ValidationFieldRefresherService
+} from './services';
 
 @NgModule({
   providers: [
@@ -9,7 +12,8 @@ import { ServerErrorReaderService, AvailableValidatorsService, ValidatorsFactory
     AvailableValidatorsService,
     ValidatorsFactoryService,
     ObjectMergeService,
-    FormMessagesCleanerService
+    FormMessagesCleanerService,
+    ValidationFieldRefresherService
   ],
   declarations: [
     ValidationModuleTestComponent,
