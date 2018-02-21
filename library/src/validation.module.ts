@@ -3,7 +3,8 @@ import { ValidationModuleTestComponent } from './components';
 import { ObjectKeysPipe } from './pipes';
 import {
   ServerErrorReaderService, AvailableValidatorsService, ValidatorsFactoryService,
-  ObjectMergeService, FormMessagesCleanerService, ValidationFieldRefresherService
+  ObjectMergeService, FormMessagesCleanerService, ValidationFieldRefresherService,
+  ValidationFieldMessagesDefaultsService
 } from './services';
 
 @NgModule({
@@ -13,7 +14,8 @@ import {
     ValidatorsFactoryService,
     ObjectMergeService,
     FormMessagesCleanerService,
-    ValidationFieldRefresherService
+    ValidationFieldRefresherService,
+    ValidationFieldMessagesDefaultsService
   ],
   declarations: [
     ValidationModuleTestComponent,

@@ -4,3 +4,4 @@ export * from './validators-factory/validators-factory.service';
 export * from './object-merge/object-merge.service';
 export * from './form-messages-cleaner/form-messages-cleaner.service';
 export * from './validation-field-refresher/validation-field-refresher.service';
+export * from './validation-field-messages-defaults/validation-field-messages-defaults.service';

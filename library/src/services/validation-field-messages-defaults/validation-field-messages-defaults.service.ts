@@ -5,20 +5,20 @@ export class ValidationFieldErrorMessages {
 }
 
 @Injectable()
-export class ValidationFieldMessagesDefaults {
+export class ValidationFieldMessagesDefaultsService {
   private static defaultMessages: ValidationFieldErrorMessages = {
     "required": "This field is required"
   };
 
   public set(error: string, defaulMessage: string) {
-    if (!!ValidationFieldMessagesDefaults.defaultMessages[error]) {
+    if (!!ValidationFieldMessagesDefaultsService.defaultMessages[error]) {
       console.warn("Default message for '" + error + "' error already exists and will be overwritten!");
     }
 
-    ValidationFieldMessagesDefaults.defaultMessages[error] = defaulMessage;
+    ValidationFieldMessagesDefaultsService.defaultMessages[error] = defaulMessage;
   }
 
   public get(error: string): string | undefined {
-    return ValidationFieldMessagesDefaults.defaultMessages[error];
+    return ValidationFieldMessagesDefaultsService.defaultMessages[error];
   }
 }

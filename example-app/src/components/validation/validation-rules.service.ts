@@ -1,6 +1,5 @@
 import { IValidationFields, IValidationRules } from './types';
 import { Injectable, Inject, Optional } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
@@ -10,7 +9,6 @@ export class ValidationRulesService {
   public static readonly VALIDATION_RULES: string = 'validationRules';
 
   constructor(
-    private httpClient: HttpClient,
     @Optional() @Inject(ValidationRulesService.VALIDATION_RULES) private validationRules: IValidationRules
   ) { }
 
