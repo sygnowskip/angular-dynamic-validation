@@ -30,6 +30,9 @@ export class ServerErrorReaderService {
   }
 
   public getErrors(response: ServerBadRequestError): Array<ServerValidationError> | undefined {
+    if (!response) {
+      return undefined;
+    }
     if (response.status !== this.badRequestStatus) {
       return undefined;
     }
