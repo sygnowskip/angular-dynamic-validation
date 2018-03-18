@@ -1,8 +1,8 @@
-import { IValidationFields, IValidationRules } from './types';
 import { Injectable, Inject, Optional } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
+import { IValidationRules, IValidationFields } from '../..';
 
 @Injectable()
 export class ValidationRulesService {
@@ -23,6 +23,10 @@ export class ValidationRulesService {
   }
 
   private process(rules: IValidationRules, model: string): IValidationFields | undefined {
+    if (!rules[model]){
+      return undefined;
+    }
+
     return rules[model].fields;
   }
 }

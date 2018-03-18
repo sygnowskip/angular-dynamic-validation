@@ -4,7 +4,7 @@ import { ObjectKeysPipe } from './pipes';
 import {
   ServerErrorReaderService, AvailableValidatorsService, ValidatorsFactoryService,
   ObjectMergeService, FormMessagesCleanerService, ValidationFieldRefresherService,
-  ValidationFieldMessagesDefaultsService, ServerErrorService
+  ValidationFieldMessagesDefaultsService, ServerErrorService, ValidationRulesService
 } from './services';
 import { FormGroupValidationRulesDirective } from './directives';
 
@@ -18,7 +18,8 @@ import { FormGroupValidationRulesDirective } from './directives';
     ValidationFieldRefresherService,
     ValidationFieldMessagesDefaultsService,
     FormGroupValidationRulesDirective,
-    ServerErrorService
+    ServerErrorService,
+    ValidationRulesService
   ],
   declarations: [
     FormMessagesComponent,
