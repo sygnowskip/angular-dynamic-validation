@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { ValidationModuleTestComponent } from './components';
+import { ValidationModuleTestComponent, FormMessagesComponent } from './components';
 import { ObjectKeysPipe } from './pipes';
 import {
   ServerErrorReaderService, AvailableValidatorsService, ValidatorsFactoryService,
   ObjectMergeService, FormMessagesCleanerService, ValidationFieldRefresherService,
   ValidationFieldMessagesDefaultsService, ServerErrorService
 } from './services';
-import { FormGroupValidationRulesDirective } from './directives/form-group-validation-rules/form-group-validation-rules.directive';
+import { FormGroupValidationRulesDirective } from './directives';
 
 @NgModule({
   providers: [
@@ -21,6 +21,7 @@ import { FormGroupValidationRulesDirective } from './directives/form-group-valid
     ServerErrorService
   ],
   declarations: [
+    FormMessagesComponent,
     ValidationModuleTestComponent,
     ObjectKeysPipe
   ],
