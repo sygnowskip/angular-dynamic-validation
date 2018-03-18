@@ -8,3 +8,4 @@ export * from './validation-field-messages-defaults/validation-field-messages-de
 export * from './server-error/server-error.service';
 export * from './validation-rules/validation-rules.service';
 export * from './validation-field-control/validation-field-control.service';
+export * from './validation-field-validators/validation-field-validators.service';

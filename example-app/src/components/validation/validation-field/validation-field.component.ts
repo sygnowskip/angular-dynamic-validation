@@ -141,4 +141,30 @@ export class ValidationFieldComponent implements OnInit {
     const mergedValidators = validators.concat(control.manualAppliedValidators || []);
     control.setValidators(mergedValidators);
   }
+
+  // CONTROL REGION
+  private getControl(): ValidationFormControl | null {
+    return this.formGroupDirective.form.get(this.field) as ValidationFormControl;
+  }
+
+  private setupControl(): ValidationFormControl {
+    const control = this.getControl();
+    if (!!control) {
+      this.displayWarningForControlWithoutCustomValidators(control);
+      return control;
+    }
+
+    this.formGroupDirective.form.addControl(this.field, this.formBuilder.control(''));
+    return <ValidationFormControl>this.getControl();
+  }
+
+  private displayWarningForControlWithoutCustomValidators(control: ValidationFormControl) {
+    if (!control) {
+      return;
+    }
+
+    if (!control.manualAppliedAsyncValidators && !control.manualAppliedValidators) {
+      console.warn("You probably used FormControl with custom validation rules, but you should use ValidationFormControl, otherwise your custom applied rules will be overwritten");
+    }
+  }
 }

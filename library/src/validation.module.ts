@@ -5,7 +5,7 @@ import {
   ServerErrorReaderService, AvailableValidatorsService, ValidatorsFactoryService,
   ObjectMergeService, FormMessagesCleanerService, ValidationFieldRefresherService,
   ValidationFieldMessagesDefaultsService, ServerErrorService, ValidationRulesService,
-  ValidationFieldControlService
+  ValidationFieldControlService, ValidationFieldValidatorsService
 } from './services';
 import { FormGroupValidationRulesDirective } from './directives';
 import { RequiredValidatorService } from './validators';
@@ -24,7 +24,8 @@ import { RequiredValidatorService } from './validators';
     ServerErrorService,
     ValidationRulesService,
     RequiredValidatorService,
-    ValidationFieldControlService
+    ValidationFieldControlService,
+    ValidationFieldValidatorsService
   ],
   declarations: [
     FormMessagesComponent,
