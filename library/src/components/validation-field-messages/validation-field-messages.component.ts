@@ -13,7 +13,7 @@ export class ValidationFieldErrors {
 @Component({
   selector: 'validation-field-messages',
   templateUrl: './validation-field-messages.component.html',
-  styleUrls: ['./validation-field-messages.component.css']
+  styleUrls: []
 })
 export class ValidationFieldMessagesComponent implements OnInit {
   @Input()
