@@ -6,6 +6,7 @@ import {
   ObjectMergeService, FormMessagesCleanerService, ValidationFieldRefresherService,
   ValidationFieldMessagesDefaultsService, ServerErrorService
 } from './services';
+import { FormGroupValidationRulesDirective } from './directives/form-group-validation-rules/form-group-validation-rules.directive';
 
 @NgModule({
   providers: [
@@ -16,6 +17,7 @@ import {
     FormMessagesCleanerService,
     ValidationFieldRefresherService,
     ValidationFieldMessagesDefaultsService,
+    FormGroupValidationRulesDirective,
     ServerErrorService
   ],
   declarations: [
