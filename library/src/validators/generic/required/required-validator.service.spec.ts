@@ -12,4 +12,10 @@ describe('RequiredValidatorService', () => {
   it('should be created', inject([RequiredValidatorService], (service: RequiredValidatorService) => {
     expect(service).toBeTruthy();
   }));
+
+  it('should return validator', inject([RequiredValidatorService], (service: RequiredValidatorService) => {
+    let validator = service.getValidator({});
+
+    expect(validator).toBeDefined();
+  }));
 });

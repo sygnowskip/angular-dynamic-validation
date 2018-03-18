@@ -7,6 +7,8 @@ import {
   ValidationFieldMessagesDefaultsService, ServerErrorService, ValidationRulesService
 } from './services';
 import { FormGroupValidationRulesDirective } from './directives';
+import { RequiredValidatorService } from './validators';
+
 
 @NgModule({
   providers: [
@@ -19,7 +21,8 @@ import { FormGroupValidationRulesDirective } from './directives';
     ValidationFieldMessagesDefaultsService,
     FormGroupValidationRulesDirective,
     ServerErrorService,
-    ValidationRulesService
+    ValidationRulesService,
+    RequiredValidatorService
   ],
   declarations: [
     FormMessagesComponent,
