@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ValidationModuleTestComponent, FormMessagesComponent } from './components';
+import { ValidationModuleTestComponent, FormMessagesComponent, ValidationFieldMessagesComponent } from './components';
 import { ObjectKeysPipe } from './pipes';
 import {
   ServerErrorReaderService, AvailableValidatorsService, ValidatorsFactoryService,
@@ -23,6 +23,7 @@ import { FormGroupValidationRulesDirective } from './directives';
   declarations: [
     FormMessagesComponent,
     ValidationModuleTestComponent,
+    ValidationFieldMessagesComponent,
     ObjectKeysPipe
   ],
   exports: [

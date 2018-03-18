@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ValidationFieldMessagesDefaults } from '../validation-field-messages-defaults/validation-field-messages-defaults.service';
+import { ValidationFieldMessagesDefaultsService } from '../..';
 
 export class ValidationFieldErrorsMessages {
   [error: string]: string | undefined;
@@ -20,14 +20,14 @@ export class ValidationFieldMessagesComponent implements OnInit {
   public validationErrors: ValidationFieldErrors;
 
   @Input()
-  public defaultValidationMessages: ValidationFieldErrorsMessages;
+  public fieldValidationMessages: ValidationFieldErrorsMessages;
 
-  constructor(private validationFieldMessages: ValidationFieldMessagesDefaults) { }
+  constructor(private validationFieldMessages: ValidationFieldMessagesDefaultsService) { }
 
   ngOnInit(): void {
   }
 
   getValidationMessage(rule: string): string | undefined {
-    return this.defaultValidationMessages[rule] || this.validationFieldMessages.get(rule);
+    return this.fieldValidationMessages[rule] || this.validationFieldMessages.get(rule);
   }
 }
