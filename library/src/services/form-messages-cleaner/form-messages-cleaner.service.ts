@@ -7,8 +7,6 @@ export class FormMessagesCleanerService {
 
   public formMessageCleanTriggered = this.cleanFormMessagesEvent.asObservable();
 
-  constructor() { }
-
   public clean() {
     this.cleanFormMessagesEvent.next();
   }

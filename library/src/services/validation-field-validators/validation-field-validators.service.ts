@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { IValidationFieldRules, ValidationFormControl } from '../..';
 import { AsyncValidatorFn } from '@angular/forms';
-import { ValidatorsFactoryService } from '..';
+import { ValidationFormControl } from '../../models/validation-form-control/validation-form-control.model';
+import { IValidationFieldRules } from '../../models/base-validation-rule/base-validation-rule.model';
+import { ValidatorsFactoryService } from '../validators-factory/validators-factory.service';
 
 @Injectable()
 export class ValidationFieldValidatorsService {
 
   constructor(private validatorsFactory: ValidatorsFactoryService) { }
 
-  public updateValidators(forField: string, control: ValidationFormControl, rulesForField: { rules: IValidationFieldRules }) {
+  public updateValidators(forField: string, control: ValidationFormControl, rulesForField: IValidationFieldRules) {
     if (!control) {
       return;
     }
@@ -21,7 +22,7 @@ export class ValidationFieldValidatorsService {
     }
   }
 
-  private applyAsyncValidators(control: ValidationFormControl, rulesForField: { rules: IValidationFieldRules }) {
+  private applyAsyncValidators(control: ValidationFormControl, rulesForField: IValidationFieldRules) {
     control.clearAsyncValidators();
 
     // TODO
@@ -30,7 +31,7 @@ export class ValidationFieldValidatorsService {
     control.setAsyncValidators(mergedAsyncValidators);
   }
 
-  private applyValidators(control: ValidationFormControl, rulesForField: { rules: IValidationFieldRules }) {
+  private applyValidators(control: ValidationFormControl, rulesForField: IValidationFieldRules) {
     control.clearValidators();
 
     const validators = this.validatorsFactory.getValidators(rulesForField);

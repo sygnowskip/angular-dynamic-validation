@@ -18,8 +18,6 @@ export class ServerValidationError {
 export class ServerErrorReaderService {
   private readonly badRequestStatus = 400;
 
-  constructor() { }
-
   public getFirstError(response: ServerBadRequestError): ServerValidationError | undefined {
     const errors = this.getErrors(response);
     if (!errors || errors.length === 0) {

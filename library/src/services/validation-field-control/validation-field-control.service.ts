@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ValidationFormControl } from '../..';
 import { FormGroupDirective, FormBuilder } from '@angular/forms';
+import { ValidationFormControl } from '../../models/validation-form-control/validation-form-control.model';
 
 @Injectable()
 export class ValidationFieldControlService {

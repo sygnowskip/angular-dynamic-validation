@@ -2,7 +2,7 @@ import { Injectable, Inject, Optional } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
-import { IValidationRules, IValidationFields } from '../..';
+import { IValidationRules, IValidationFields } from '../../models/base-validation-rule/base-validation-rule.model';
 
 @Injectable()
 export class ValidationRulesService {

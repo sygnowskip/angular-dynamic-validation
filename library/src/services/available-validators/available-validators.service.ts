@@ -1,6 +1,6 @@
-import { IBaseValidationRule } from "../../models";
 import { IValidatorService } from "../../validators/validator.interface";
 import { Injectable } from "@angular/core";
+import { IBaseValidationRule } from "../../models/base-validation-rule/base-validation-rule.model";
 
 export interface IValidatorsDefinition {
   [name: string]: Validator | undefined;

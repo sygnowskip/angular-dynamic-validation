@@ -1,15 +1,14 @@
 import { Injectable, Injector } from "@angular/core";
 import { ValidatorFn } from "@angular/forms";
-import { IValidationFieldRules, IBaseValidationRule } from "../../models";
 import { AvailableValidatorsService } from "./../available-validators/available-validators.service";
+import { IValidationFieldRules, IBaseValidationRule } from "../../models/base-validation-rule/base-validation-rule.model";
 
 @Injectable()
 export class ValidatorsFactoryService {
   constructor(private injector: Injector,
   private availableValidators: AvailableValidatorsService) { }
 
-  getValidators(field: { rules: IValidationFieldRules }): Array<ValidatorFn> {
-    const fieldRules = field.rules;
+  getValidators(fieldRules: IValidationFieldRules): Array<ValidatorFn> {
     const validators = new Array<ValidatorFn>();
 
     for (const ruleName in fieldRules) {

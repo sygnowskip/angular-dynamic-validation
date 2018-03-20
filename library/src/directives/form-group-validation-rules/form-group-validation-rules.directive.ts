@@ -2,7 +2,7 @@ import { Directive, SimpleChanges } from '@angular/core';
 import { Input } from '@angular/core';
 import { OnInit, OnChanges } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { IValidationFields } from '../..';
+import { IValidationFields } from '../../models/base-validation-rule/base-validation-rule.model';
 
 @Directive({
   selector: '[formGroupValidationRules]'

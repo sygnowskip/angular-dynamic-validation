@@ -2,8 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from "@angular/platform-browser";
 
 import { FormMessagesComponent } from './form-messages.component';
-import { FormMessagesCleanerService, ServerErrorService, ServerErrorReaderService, ServerBadRequestError } from '../..';
 import { FormGroupDirective } from '@angular/forms';
+import { ServerBadRequestError } from '../../services/server-error-reader/server-error-reader.service';
+import { FormMessagesCleanerService } from '../../services/form-messages-cleaner/form-messages-cleaner.service';
+import { ServerErrorService } from '../../services/server-error/server-error.service';
+import { ServerErrorReaderService } from '../../services/server-error-reader/server-error-reader.service';
 
 describe('FormMessagesComponent', () => {
   let component: FormMessagesComponent;

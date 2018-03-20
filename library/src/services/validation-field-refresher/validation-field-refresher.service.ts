@@ -7,8 +7,6 @@ export class ValidationFieldRefresherService {
 
   public refreshValidationTriggered = this.refreshValidationForPropertyEvent.asObservable();
 
-  constructor() { }
-
   public refresh(field: string) {
     this.refreshValidationForPropertyEvent.next(field);
   }

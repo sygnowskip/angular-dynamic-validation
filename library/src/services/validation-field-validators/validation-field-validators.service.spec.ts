@@ -1,8 +1,9 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { ValidationFieldValidatorsService } from './validation-field-validators.service';
-import { ValidatorsFactoryService, AvailableValidatorsService } from '..';
-import { ValidationFormControl } from '../..';
+import { ValidatorsFactoryService } from '../validators-factory/validators-factory.service';
+import { AvailableValidatorsService } from '../available-validators/available-validators.service';
+import { ValidationFormControl } from '../../models/validation-form-control/validation-form-control.model';
 
 describe('ValidationFieldValidatorsService', () => {
   beforeEach(() => {

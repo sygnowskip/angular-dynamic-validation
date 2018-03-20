@@ -1,11 +1,12 @@
 import { Component, OnInit, SkipSelf, Host, Optional } from '@angular/core';
 import { FormGroupDirective } from '@angular/forms';
-import { ServerErrorService, FormMessagesCleanerService, ServerValidationError } from '../..';
+import { ServerErrorService } from '../../services/server-error/server-error.service';
+import { FormMessagesCleanerService } from '../../services/form-messages-cleaner/form-messages-cleaner.service';
+import { ServerValidationError } from '../../services/server-error-reader/server-error-reader.service';
 
 @Component({
   selector: 'form-messages',
-  templateUrl: './form-messages.component.html',
-  styleUrls: []
+  templateUrl: './form-messages.component.html'
 })
 export class FormMessagesComponent implements OnInit {
   private errorMessages: Array<string> = new Array<string>();

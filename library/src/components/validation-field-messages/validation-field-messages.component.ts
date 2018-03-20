@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ValidationFieldMessagesDefaultsService } from '../..';
+import { ValidationFieldMessagesDefaultsService } from '../../services/validation-field-messages-defaults/validation-field-messages-defaults.service';
 
 export class ValidationFieldErrorsMessages {
   [error: string]: string | undefined;
@@ -12,8 +12,7 @@ export class ValidationFieldErrors {
 
 @Component({
   selector: 'validation-field-messages',
-  templateUrl: './validation-field-messages.component.html',
-  styleUrls: []
+  templateUrl: './validation-field-messages.component.html'
 })
 export class ValidationFieldMessagesComponent implements OnInit {
   @Input()

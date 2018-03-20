@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { ValidationFieldControlService } from './validation-field-control.service';
 import { FormBuilder, FormGroupDirective, FormControl, Validators } from '@angular/forms';
-import { ValidationFormControl } from '../..';
+import { ValidationFormControl } from '../../models/validation-form-control/validation-form-control.model';
 
 describe('ValidationFieldControlService', () => {
   beforeEach(() => {
