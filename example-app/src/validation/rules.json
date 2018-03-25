@@ -16,8 +16,8 @@
       },
       "surname": {
         "rules": {
-          "regex": {
-            "regex": "^[^0][0-9]+$",
+          "custom-validator": {
+            "message": "This is custom validator message",
             "ignoreCase": false
           }
         }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Host, Input, SkipSelf } from '@angular/core';
+import { Component, OnInit, Host, Input, SkipSelf, Optional } from '@angular/core';
 import { FormControl, FormGroupDirective, FormGroup, Validators, ControlContainer, Form, FormBuilder, ValidatorFn, AsyncValidatorFn } from '@angular/forms';
 import { ValidationFieldDefaultMessagesService } from '../../services/validation-field-default-messages/validation-field-default-messages.service';
 import { ValidationFieldRulesExtractorService } from '../../services/validation-field-rules-extractor/validation-field-rules-extractor.service';
@@ -29,8 +29,8 @@ export class ValidationFieldComponent implements OnInit {
   public label: string;
 
   constructor(
-    @Host() @SkipSelf() private formGroupDirective: FormGroupDirective,
-    @Host() @SkipSelf() private rulesDirective: FormGroupValidationRulesDirective,
+    @Host() @SkipSelf() @Optional() private formGroupDirective: FormGroupDirective,
+    @Host() @SkipSelf() @Optional() private rulesDirective: FormGroupValidationRulesDirective,
     private validationFieldValidator: ValidationFieldValidatorsService,
     private validationFieldControl: ValidationFieldControlService,
     private validationFieldRulesExtractor: ValidationFieldRulesExtractorService,
@@ -53,6 +53,10 @@ export class ValidationFieldComponent implements OnInit {
   private bindServerErrors() {
     this.serverErrors.validationErrorOccured.subscribe((error: ServerValidationError) => {
       if (error.property !== this.field) {
+        return;
+      }
+
+      if (!this.control) {
         return;
       }
 

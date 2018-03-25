@@ -1,4 +1,4 @@
-import { IValidationFields } from '../components/validation/types';
+import { IValidationFields } from 'angular-dynamic-validation';
 
 export default <{ [model: string]: { fields: IValidationFields } }>{
   exampleModel: {

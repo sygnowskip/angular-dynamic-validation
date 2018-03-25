@@ -12,7 +12,7 @@ import { ValidationFieldRefresherService } from '../../services/validation-field
 import { ServerErrorService } from '../../services/server-error/server-error.service';
 import { FormMessagesCleanerService } from '../../services/form-messages-cleaner/form-messages-cleaner.service';
 import { ServerErrorReaderService } from '../../services/server-error-reader/server-error-reader.service';
-import { ValidationFieldMessagesDefaultsService } from '../../services/validation-field-messages-defaults/validation-field-messages-defaults.service';
+import { ValidationRulesDefaultMessagesService } from '../../services/validation-field-messages-defaults/validation-field-messages-defaults.service';
 import { FormGroupValidationRulesDirective } from '../../directives/form-group-validation-rules/form-group-validation-rules.directive';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ValidatorsFactoryService } from '../../services/validators-factory/validators-factory.service';
@@ -52,7 +52,7 @@ describe('ValidationFieldComponent', () => {
         FormMessagesCleanerService,
         ServerErrorReaderService,
         ServerErrorService,
-        ValidationFieldMessagesDefaultsService,
+        ValidationRulesDefaultMessagesService,
         ValidatorsFactoryService,
         AvailableValidatorsService,
         FormBuilder,

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-import { AvailableValidators } from "../validators-factory/validators-factory.service";
-import { RequiredValidatorService } from "../validators-factory/validators/required/required-validator.service";
+import { AvailableValidatorsService } from "angular-dynamic-validation";
+import { ExampleCustomValidatorService } from "./custom-validators/example-custom-validator.service";
 
-export function registerCustomValidators() {
-  AvailableValidators.register('required', RequiredValidatorService);
+export function registerCustomValidators(availableValidators: AvailableValidatorsService) {
+  availableValidators.register('custom-validator', ExampleCustomValidatorService);
 }

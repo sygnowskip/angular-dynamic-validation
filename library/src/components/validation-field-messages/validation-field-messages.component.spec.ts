@@ -2,13 +2,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ValidationFieldMessagesComponent, ValidationFieldErrorsMessages, ValidationFieldErrors } from './validation-field-messages.component';
 import { By } from '@angular/platform-browser';
-import { ValidationFieldMessagesDefaultsService } from '../../services/validation-field-messages-defaults/validation-field-messages-defaults.service';
+import { ValidationRulesDefaultMessagesService } from '../../services/validation-field-messages-defaults/validation-field-messages-defaults.service';
 import { ObjectKeysPipe } from '../../pipes/object-keys-pipe/object-keys.pipe';
 
 describe('ValidationFieldMessagesComponent', () => {
   let component: ValidationFieldMessagesComponent;
   let fixture: ComponentFixture<ValidationFieldMessagesComponent>;
-  let defaultMessagesService: ValidationFieldMessagesDefaultsService;
+  let defaultMessagesService: ValidationRulesDefaultMessagesService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -17,7 +17,7 @@ describe('ValidationFieldMessagesComponent', () => {
         ObjectKeysPipe
       ],
       providers: [
-        ValidationFieldMessagesDefaultsService
+        ValidationRulesDefaultMessagesService
       ]
     });
 
@@ -28,7 +28,7 @@ describe('ValidationFieldMessagesComponent', () => {
     component.validationErrors = <ValidationFieldErrors>{};
     fixture.detectChanges();
 
-    defaultMessagesService = TestBed.get(ValidationFieldMessagesDefaultsService);
+    defaultMessagesService = TestBed.get(ValidationRulesDefaultMessagesService);
   }));
 
   it('should create', () => {

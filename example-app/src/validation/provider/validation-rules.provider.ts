@@ -1,11 +1,8 @@
-import { IValidationRules } from '../../components/validation/types';
+import { IValidationRules, ObjectMergeService } from 'angular-dynamic-validation';
 import * as validationRules from './../rules.json';
 import customValidationRules from './../custom-rules';
 
 
-export class ValidationRulesProvider {
-  constructor(private objectMerge: ObjectMergeService) { }
-  static getRules(): IValidationRules {
-    return ObjectMergeService.deepMerge(validationRules, customValidationRules);
-  }
+export function getValidationRules(objectMerge: ObjectMergeService) {
+  return objectMerge.deepMerge(validationRules, customValidationRules);
 }

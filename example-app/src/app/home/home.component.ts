@@ -1,12 +1,7 @@
-import { ValidationRulesService } from '../../components/validation/validation-rules.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { IValidationFields } from '../../components/validation/types';
-import { ValidationFormControl } from '../../components/validation/validation-form-control/validation-form-control.model';
-import { ValidationFieldRefresherService } from '../../components/validation/validation-field-refresher/validation-field-refresher.service';
 import { HttpClient } from '@angular/common/http';
-import { CustomValidators } from '../../components/validation/validators-factory/validators/conditional-validator/conditional-validator.service';
-import { ServerErrorService } from '../../components/validation/server-error/server-error.service';
+import { IValidationFields, ValidationFormControl, ManualConditionalValidator, ValidationRulesService, ValidationFieldRefresherService, ServerErrorService } from 'angular-dynamic-validation';
 
 export class HomeModel {
   public name: string;
@@ -35,7 +30,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.model = new HomeModel();
     this.form = new FormGroup({
-      surname: new ValidationFormControl('', [CustomValidators.conditionalValidator(() => this.model.isSurnameRequired, Validators.required)]),
+      surname: new ValidationFormControl('', [ManualConditionalValidator.validator(() => this.model.isSurnameRequired, Validators.required)]),
       isSurnameRequired: new ValidationFormControl()
     });
     this.validationRulesService.getValidation("exampleModel").subscribe(rules => {
@@ -50,6 +45,7 @@ export class HomeComponent implements OnInit {
   }
 
   private callApi(): void {
+    console.log(this.form);
     this.http.post('http://localhost:4201/api/without-errors', undefined).subscribe(
       data => {
       },
