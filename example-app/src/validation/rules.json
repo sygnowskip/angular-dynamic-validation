@@ -13,14 +13,6 @@
             "message": "Max length is 50"
           }
         }
-      },
-      "surname": {
-        "rules": {
-          "custom-validator": {
-            "message": "This is custom validator message",
-            "ignoreCase": false
-          }
-        }
       }
     }
   }

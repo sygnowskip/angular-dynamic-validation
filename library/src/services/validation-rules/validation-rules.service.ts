@@ -7,17 +7,24 @@ import { IValidationRules, IValidationFields } from '../../models/base-validatio
 @Injectable()
 export class ValidationRulesService {
   public static readonly VALIDATION_RULES: string = 'validationRules';
+  private readonly validationRules: IValidationRules;
 
   constructor(
-    @Optional() @Inject(ValidationRulesService.VALIDATION_RULES) private validationRules: IValidationRules
-  ) { }
+    @Optional() @Inject(ValidationRulesService.VALIDATION_RULES) validationRulesFactory: () => IValidationRules
+  ) {
+    if (!validationRulesFactory){
+      console.error("Cannot resolve validation rules, you probably missing registration in your app.module.ts:\n" +
+        "e.g. `{ provide: ValidationRulesService.VALIDATION_RULES, useFactory: () => validationRules ) }` in `providers` section");
+        return;
+    }
+
+    this.validationRules = validationRulesFactory();
+  }
 
   public getValidation(model: string): Observable<IValidationFields | undefined> {
     if (this.validationRules) {
       return Observable.of(this.process(this.validationRules, model));
     } else {
-      console.error("Cannot resolve validation rules, you probably missing registration in your app.module.ts:\n" +
-        "e.g. `{ provide: ValidationRulesService.VALIDATION_RULES, useValue: validationRules }` in `providers` section");
         return Observable.of<IValidationFields>();
     }
   }

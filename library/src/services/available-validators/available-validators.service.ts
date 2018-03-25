@@ -1,6 +1,7 @@
 import { IValidatorService } from "../../validators/validator.interface";
 import { Injectable } from "@angular/core";
 import { IBaseValidationRule } from "../../models/base-validation-rule/base-validation-rule.model";
+import { RequiredValidatorService } from "../../validators/generic/required/required-validator.service";
 
 export interface IValidatorsDefinition {
   [name: string]: Validator | undefined;
@@ -19,7 +20,7 @@ export class Validator {
 @Injectable()
 export class AvailableValidatorsService {
   private static validators: IValidatorsDefinition = {
-    // 'required': new Validator('required', RequiredValidatorService)
+    'required': new Validator('required', RequiredValidatorService)
   };
 
   public register(name: string, service: { new(): IValidatorService<IBaseValidationRule> }) {

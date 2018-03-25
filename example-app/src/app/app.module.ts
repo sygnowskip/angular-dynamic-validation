@@ -13,6 +13,7 @@ import { registerCustomValidators } from '../components/validation/custom-valida
 import { defaultErrorMessagesConfiguration } from '../components/validation/validation-field-messages-defaults-registration/validation-field-messages-defaults-registration.function';
 
 import { ValidationModule, ValidationRulesDefaultMessagesService, ValidationRulesService, ObjectMergeService, AvailableValidatorsService } from 'angular-dynamic-validation';
+import { ExampleCustomValidatorService } from '../components/validation/custom-validators-registration/custom-validators/example-custom-validator.service';
 
 const routes: Routes = [
   {
@@ -36,8 +37,7 @@ const routes: Routes = [
     {
       provide: ValidationRulesService.VALIDATION_RULES,
       useFactory: (objectMerge: ObjectMergeService) => () => getValidationRules(objectMerge),
-      deps: [ObjectMergeService],
-      multi: true
+      deps: [ObjectMergeService]
     },
     {
       provide: APP_INITIALIZER,
@@ -50,7 +50,8 @@ const routes: Routes = [
       useFactory: (validationFieldMessagesDefaults: ValidationRulesDefaultMessagesService) => () => defaultErrorMessagesConfiguration(validationFieldMessagesDefaults),
       deps: [ValidationRulesDefaultMessagesService],
       multi: true
-    }
+    },
+    ExampleCustomValidatorService
   ],
   bootstrap: [AppComponent]
 })
