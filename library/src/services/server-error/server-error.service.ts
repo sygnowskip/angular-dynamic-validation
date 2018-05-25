@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { ServerErrorReaderService, ServerBadRequestError, ServerValidationError } from '../server-error-reader/server-error-reader.service';
 import { FormMessagesCleanerService } from '../form-messages-cleaner/form-messages-cleaner.service';
 

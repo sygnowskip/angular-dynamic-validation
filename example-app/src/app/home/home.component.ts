@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
       surname: new ValidationFormControl('', [ManualConditionalValidator.validator(() => this.model.isSurnameRequired, Validators.required)]),
       isSurnameRequired: new ValidationFormControl()
     });
-    this.validationRulesService.getValidation("exampleModel").subscribe(rules => {
+    this.validationRulesService.getValidation("exampleModel").subscribe((rules: IValidationFields | undefined) => {
       if (rules) {
         this.rules = rules;
       }
