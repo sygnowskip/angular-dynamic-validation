@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { IValidationFields, ValidationFormControl, ManualConditionalValidator, ValidationRulesService, ValidationFieldRefresherService, ServerErrorService } from 'angular-dynamic-validation';
+import { IValidationFields, ValidationFormControl, ValidationRulesService, ValidationFieldRefresherService, ServerErrorService } from 'angular-dynamic-validation';
 
 export class HomeModel {
   public name: string;
@@ -30,7 +30,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.model = new HomeModel();
     this.form = new FormGroup({
-      surname: new ValidationFormControl('', [ManualConditionalValidator.validator(() => this.model.isSurnameRequired, Validators.required)]),
       isSurnameRequired: new ValidationFormControl()
     });
     this.validationRulesService.getValidation("exampleModel").subscribe((rules: IValidationFields | undefined) => {
