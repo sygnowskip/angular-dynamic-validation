@@ -15,8 +15,7 @@
       "node_modules/@types"
     ],
     "paths": {
-      "@angular/*": ["../node_modules/@angular/*"],
-      "rxjs/*": [ "../node_modules/rxjs/*" ]
+      "*": ["../node_modules/*"]
     },
     "lib": [
       "es2017",
