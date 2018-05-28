@@ -72,7 +72,6 @@ export default {
       /angular(\\|\/)core(\\|\/)@angular/,
       path.join(__dirname, 'src')
     ),
-
     new webpack.optimize.UglifyJsPlugin({
       include: /\.min\.js$/,
       sourceMap: true

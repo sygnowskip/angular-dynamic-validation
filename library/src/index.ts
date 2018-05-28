@@ -10,5 +10,4 @@ export { AvailableValidatorsService } from './services/available-validators/avai
 export { IBaseValidationRule, IValidationRules, IValidationFields } from './models/base-validation-rule/base-validation-rule.model';
 export { ValidationFormControl } from './models/validation-form-control/validation-form-control.model';
 
-export { ManualConditionalValidator } from './validators/manually/conditional-validator/manual-conditional-validator.service';
 export { IValidatorService } from './validators/validator.interface';

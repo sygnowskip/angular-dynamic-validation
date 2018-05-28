@@ -24,12 +24,13 @@ describe('RequiredValidatorService', () => {
   });
 
   it('should return rules if rules are set and model exists', () => {
-    let service = new ValidationRulesService({
-      "existing-model":{
-        fields: {
-
+    let service = new ValidationRulesService(() => {
+      return {
+        "existing-model": {
+          fields: {
+          }
         }
-      }
+      };
     });
 
     let nonExisting;
@@ -40,12 +41,14 @@ describe('RequiredValidatorService', () => {
   });
 
   it('should return undefined if rules are set but model does not exists', () => {
-    let service = new ValidationRulesService({
-      "existing-model":{
-        fields: {
+    let service = new ValidationRulesService(() => {
+      return {
+        "existing-model": {
+          fields: {
 
+          }
         }
-      }
+      };
     });
 
     let nonExisting;

@@ -22,6 +22,8 @@ export class ValidationFormControl extends FormControl {
     }
   }
 
+
+
   // SOURCE: ANGULAR
   isOptionsObj(validatorOrOpts?: ValidatorFn | ValidatorFn[] | AbstractControlOptions | null): boolean {
     return validatorOrOpts != null && !Array.isArray(validatorOrOpts) && typeof validatorOrOpts === 'object';

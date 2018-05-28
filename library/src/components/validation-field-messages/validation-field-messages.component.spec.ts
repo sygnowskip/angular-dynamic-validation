@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ValidationFieldMessagesComponent, ValidationFieldErrorsMessages, ValidationFieldErrors } from './validation-field-messages.component';
 import { By } from '@angular/platform-browser';
-import { ValidationRulesDefaultMessagesService } from '../../services/validation-field-messages-defaults/validation-field-messages-defaults.service';
+import { ValidationRulesDefaultMessagesService } from '../../services/validation-rules-default-messages/validation-rules-default-messages.service';
 import { ObjectKeysPipe } from '../../pipes/object-keys-pipe/object-keys.pipe';
 
 describe('ValidationFieldMessagesComponent', () => {

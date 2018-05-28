@@ -1,7 +1,7 @@
+import { Observable } from 'rxjs';
 import { Injectable, Inject, Optional } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/map';
+import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { IValidationRules, IValidationFields } from '../../models/base-validation-rule/base-validation-rule.model';
 
 @Injectable()
@@ -12,10 +12,10 @@ export class ValidationRulesService {
   constructor(
     @Optional() @Inject(ValidationRulesService.VALIDATION_RULES) validationRulesFactory: () => IValidationRules
   ) {
-    if (!validationRulesFactory){
+    if (!validationRulesFactory) {
       console.error("Cannot resolve validation rules, you probably missing registration in your app.module.ts:\n" +
         "e.g. `{ provide: ValidationRulesService.VALIDATION_RULES, useFactory: () => validationRules ) }` in `providers` section");
-        return;
+      return;
     }
 
     this.validationRules = validationRulesFactory();
@@ -23,14 +23,14 @@ export class ValidationRulesService {
 
   public getValidation(model: string): Observable<IValidationFields | undefined> {
     if (this.validationRules) {
-      return Observable.of(this.process(this.validationRules, model));
+      return of(this.process(this.validationRules, model));
     } else {
-        return Observable.of<IValidationFields>();
+      return of<IValidationFields>();
     }
   }
 
   private process(rules: IValidationRules, model: string): IValidationFields | undefined {
-    if (!rules[model]){
+    if (!rules[model]) {
       return undefined;
     }
 
