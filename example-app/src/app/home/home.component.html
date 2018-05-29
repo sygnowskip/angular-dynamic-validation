@@ -1,19 +1,11 @@
-<form [formGroup]="form" [formGroupValidationRules]="rules" (ngSubmit)="onSubmit()">
-  <form-messages></form-messages>
-  <div class="form-check">
-    <input type="checkbox" class="form-check-input" formControlName="isSurnameRequired" (change)="checkboxChanged()">
-    <label class="form-check-label" for="surnameRequired">Surname required</label>
-  </div>
-  <validation-field field="name" label="Name">
+<form [validationFormGroup]="form" (ngSubmit)="onSubmit()" name="exampleModel">
+  <validation-field label="Name">
     <input type="text" class="form-control" formControlName="name" placeholder="Enter name" />
-    <small id="nameHelp" class="form-text text-muted">We'll never share your name with anyone else.</small>
   </validation-field>
-  <validation-field field="surname" label="Surname">
+
+  <validation-field label="Surname">
     <input type="text" class="form-control" formControlName="surname" placeholder="Enter surname" />
-    <small id="surnameHelp" class="form-text text-muted">We'll never share your surname with anyone else.</small>
   </validation-field>
+
   <button type="submit">Submit</button>
 </form>
-{{
-  form.value | json
-}}

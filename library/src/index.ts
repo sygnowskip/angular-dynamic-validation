@@ -11,3 +11,5 @@ export { IBaseValidationRule, IValidationRules, IValidationFields } from './mode
 export { ValidationFormControl } from './models/validation-form-control/validation-form-control.model';
 
 export { IValidatorService } from './validators/validator.interface';
+
+export { ValidationFieldMessagesComponent } from './components/validation-field-messages/validation-field-messages.component';

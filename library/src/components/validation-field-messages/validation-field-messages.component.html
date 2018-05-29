@@ -1,5 +1,5 @@
-<div class="errors">
-  <div *ngFor="let error of validationErrors | keys">
+<ul class="errors">
+  <li *ngFor="let error of validationErrors | keys">
     {{ getValidationMessage(error) }}
-  </div>
-</div>
+  </li>
+</ul>

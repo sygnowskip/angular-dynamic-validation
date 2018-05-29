@@ -5,7 +5,7 @@ import { ValidationFieldErrorsMessages } from '../../components/validation-field
 @Injectable()
 export class ValidationFieldDefaultMessagesService {
   public getDefaultMessages(rulesForField: IValidationFieldRules | undefined, current?: ValidationFieldErrorsMessages): ValidationFieldErrorsMessages {
-    if (!current){
+    if (!current) {
       current = new ValidationFieldErrorsMessages();
     }
 

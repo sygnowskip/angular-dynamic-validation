@@ -6,7 +6,6 @@ import { ObjectMergeService } from './services/object-merge/object-merge.service
 import { FormMessagesCleanerService } from './services/form-messages-cleaner/form-messages-cleaner.service';
 import { ValidationFieldRefresherService } from './services/validation-field-refresher/validation-field-refresher.service';
 import { ValidationRulesDefaultMessagesService } from './services/validation-rules-default-messages/validation-rules-default-messages.service';
-import { FormGroupValidationRulesDirective } from './directives/form-group-validation-rules/form-group-validation-rules.directive';
 import { ServerErrorService } from './services/server-error/server-error.service';
 import { ValidationRulesService } from './services/validation-rules/validation-rules.service';
 import { RequiredValidatorService } from './validators/generic/required/required-validator.service';
@@ -20,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { ValidationFieldComponent } from './components/validation-field/validation-field.component';
 import { ValidationFieldDefaultMessagesService } from './services/validation-field-default-messages/validation-field-default-messages.service';
+import { ValidationFormGroupDirective } from './directives/validation-form-group/validation-form-group.directive';
 
 
 @NgModule({
@@ -35,7 +35,6 @@ import { ValidationFieldDefaultMessagesService } from './services/validation-fie
     FormMessagesCleanerService,
     ValidationFieldRefresherService,
     ValidationRulesDefaultMessagesService,
-    FormGroupValidationRulesDirective,
     ServerErrorService,
     ValidationRulesService,
     RequiredValidatorService,
@@ -48,15 +47,15 @@ import { ValidationFieldDefaultMessagesService } from './services/validation-fie
     FormMessagesComponent,
     ValidationFieldMessagesComponent,
     ValidationFieldComponent,
-    FormGroupValidationRulesDirective,
-    ObjectKeysPipe
+    ObjectKeysPipe,
+    ValidationFormGroupDirective
   ],
   exports: [
     FormMessagesComponent,
     ValidationFieldMessagesComponent,
     ValidationFieldComponent,
-    FormGroupValidationRulesDirective,
-    ObjectKeysPipe
+    ObjectKeysPipe,
+    ValidationFormGroupDirective
   ]
 })
 export class ValidationModule {
