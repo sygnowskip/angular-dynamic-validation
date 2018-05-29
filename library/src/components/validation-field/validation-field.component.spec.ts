@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ValidationFieldComponent } from './validation-field.component';
 import { ValidationFieldRulesExtractorService } from '../../services/validation-field-rules-extractor/validation-field-rules-extractor.service';
 import { ValidationFieldDefaultMessagesService } from '../../services/validation-field-default-messages/validation-field-default-messages.service';
@@ -13,11 +12,11 @@ import { ServerErrorService } from '../../services/server-error/server-error.ser
 import { FormMessagesCleanerService } from '../../services/form-messages-cleaner/form-messages-cleaner.service';
 import { ServerErrorReaderService } from '../../services/server-error-reader/server-error-reader.service';
 import { ValidationRulesDefaultMessagesService } from '../../services/validation-rules-default-messages/validation-rules-default-messages.service';
-import { FormGroupValidationRulesDirective } from '../../directives/form-group-validation-rules/form-group-validation-rules.directive';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ValidatorsFactoryService } from '../../services/validators-factory/validators-factory.service';
 import { AvailableValidatorsService } from '../../services/available-validators/available-validators.service';
 import { ValidationFormControl } from '../../models/validation-form-control/validation-form-control.model';
+import { ValidationFormGroupDirective } from '../../directives/validation-form-group/validation-form-group.directive';
 
 describe('ValidationFieldComponent', () => {
   let component: ValidationFieldComponent;
@@ -28,9 +27,7 @@ describe('ValidationFieldComponent', () => {
         return new ValidationFormControl();
       },
       addControl: () => void {}
-    }
-  };
-  let validationRulesDirective = {
+    },
     validationRulesChanged: {
       subscribe: () => void {}
     }
@@ -56,8 +53,7 @@ describe('ValidationFieldComponent', () => {
         ValidatorsFactoryService,
         AvailableValidatorsService,
         FormBuilder,
-        { provide: FormGroupDirective, useValue: formDirective },
-        { provide: FormGroupValidationRulesDirective, useValue: validationRulesDirective }
+        { provide: ValidationFormGroupDirective, useValue: formDirective }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     });

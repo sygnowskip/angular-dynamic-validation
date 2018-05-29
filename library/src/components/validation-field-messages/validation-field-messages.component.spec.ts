@@ -42,7 +42,7 @@ describe('ValidationFieldMessagesComponent', () => {
     };
     fixture.detectChanges();
 
-    var errorsCount = fixture.debugElement.queryAll(By.css('div.errors > div')).length;
+    var errorsCount = fixture.debugElement.queryAll(By.css('ul.errors > li')).length;
     expect(errorsCount).toEqual(2);
   });
 
@@ -55,7 +55,7 @@ describe('ValidationFieldMessagesComponent', () => {
     }
     fixture.detectChanges();
 
-    var error = fixture.debugElement.nativeElement.querySelector('div.errors > div');
+    var error = fixture.debugElement.nativeElement.querySelector('ul.errors > li');
     expect(error).toBeDefined();
     expect(error.textContent).toContain("Custom validation message");
   });
@@ -66,7 +66,7 @@ describe('ValidationFieldMessagesComponent', () => {
     };
     fixture.detectChanges();
 
-    var error = fixture.debugElement.nativeElement.querySelector('div.errors > div');
+    var error = fixture.debugElement.nativeElement.querySelector('ul.errors > li');
     expect(error).toBeDefined();
     expect(error.textContent).toContain(defaultMessagesService.get("required"));
   });
