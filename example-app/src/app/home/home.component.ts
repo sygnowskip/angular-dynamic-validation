@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { IValidationFields, ServerErrorService, ValidationFormControl } from 'angular-dynamic-validation';
+import { FormGroup } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
-import { IValidationFields, ValidationFormControl, ValidationRulesService, ValidationFieldRefresherService, ServerErrorService } from 'angular-dynamic-validation';
 
 export class HomeModel {
   public name: string;
   public surname: string;
-  public isSurnameRequired: boolean;
 }
 
 @Component({
@@ -20,8 +19,6 @@ export class HomeComponent implements OnInit {
   public rules: IValidationFields;
 
   constructor(
-    private validationRulesService: ValidationRulesService,
-    private validationRefresher: ValidationFieldRefresherService,
     private http: HttpClient,
     private serverErrors: ServerErrorService
   ) {
@@ -30,21 +27,12 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.model = new HomeModel();
     this.form = new FormGroup({
-      isSurnameRequired: new ValidationFormControl()
-    });
-    this.validationRulesService.getValidation("exampleModel").subscribe((rules: IValidationFields | undefined) => {
-      if (rules) {
-        this.rules = rules;
-      }
-    });
-
-    this.form.valueChanges.subscribe((changes: any) => {
-      // TODO Iterate over and find changed properties
+      name: new ValidationFormControl(),
+      surname: new ValidationFormControl()
     });
   }
 
   private callApi(): void {
-    console.log(this.form);
     this.http.post('http://localhost:4201/api/without-errors', undefined).subscribe(
       data => {
       },
@@ -61,9 +49,4 @@ export class HomeComponent implements OnInit {
   onSubmit() {
     this.callApi();
   }
-
-  public checkboxChanged() {
-    this.validationRefresher.refresh('surname');
-  }
-
 }
