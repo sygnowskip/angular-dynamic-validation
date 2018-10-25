@@ -43,6 +43,10 @@ export class ValidationFormGroupDirective extends FormGroupDirective implements 
   public rules: IValidationFields | undefined;
 
   @HostListener('submit', ['$event']) submit($event) {
+    if (this.form.invalid) {
+      return false;
+    }
+
     return super.onSubmit($event);
   }
 

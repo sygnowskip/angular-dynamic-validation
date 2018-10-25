@@ -47,10 +47,6 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.form.invalid) {
-      return;
-    }
-
     this.callApi();
   }
 }
